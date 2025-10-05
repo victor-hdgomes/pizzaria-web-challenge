@@ -1,0 +1,1 @@
+export * from "@/app/(public)/_components/Hero/Hero";
