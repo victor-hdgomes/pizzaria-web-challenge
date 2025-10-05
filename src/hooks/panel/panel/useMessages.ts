@@ -26,9 +26,16 @@ const fetchMessages = async (queryClient: QueryClient): Promise<MessageData[]> =
 export const useMessages = (): UseQueryResult<MessageData[], Error> => {
   const queryClient = useQueryClient();
 
-  return useQuery<MessageData[], Error>({
+  const query = useQuery<MessageData[], Error>({
     queryKey: ["fetchMessages"],
     queryFn: () => fetchMessages(queryClient),
     retry: false,
   });
+
+  if (query.isSuccess) {
+    localStorage.setItem("sessionValidated", "false");
+    queryClient.invalidateQueries({ queryKey: ["fetchSession"] });
+  }
+
+  return query;
 };
