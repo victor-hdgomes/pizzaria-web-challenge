@@ -11,7 +11,7 @@ import { useSendMessage } from "@/hooks/panel/panel/useSendMessage";
 export default function Panel() {
   const { data, isLoading, error } = useMessages();
   const messages = useMemo(() => data, [data]);
-const { mutate: sendMessage, isPending: isSending } = useSendMessage();
+  const { mutate: sendMessage, isPending: isSending } = useSendMessage();
 
   const handleSend = (message: string) => {
     sendMessage({ content: message });
